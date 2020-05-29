@@ -7,5 +7,6 @@ class ApplicationController < ActionController::API include ActionController::Co
     def logged_in?
         !!session[:user_id]
     end
+    
 end
 
