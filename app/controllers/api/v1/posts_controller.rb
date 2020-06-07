@@ -4,7 +4,7 @@ class Api::V1::PostsController < ApplicationController
     def index
       @posts = Post.all
   
-      render json: @posts
+      render json: @posts, include: [:user]
     end
   
     def show
@@ -13,8 +13,10 @@ class Api::V1::PostsController < ApplicationController
   
     def create
       # binding.pry
+      @user = current_user
       @post = Post.new(post_params)
-  
+      @post.user = @user
+
       if @post.save
         render json: @post, status: :created
       else
@@ -42,7 +44,7 @@ class Api::V1::PostsController < ApplicationController
   
       # Only allow a trusted parameter "white list" through.
       def post_params
-        params.require(:entry).permit(:entry)
+        params.require(:post).permit(:entry)
       end
   end
   

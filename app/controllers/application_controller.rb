@@ -1,4 +1,5 @@
-class ApplicationController < ActionController::API include ActionController::Cookies
+class ApplicationController < ActionController::API 
+    include ::ActionController::Cookies
     
     def current_user
         User.find(session[:user_id])
@@ -7,6 +8,6 @@ class ApplicationController < ActionController::API include ActionController::Co
     def logged_in?
         !!session[:user_id]
     end
-    
+
 end
 
